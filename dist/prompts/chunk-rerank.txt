@@ -1,0 +1,17 @@
+You are a legal document retrieval reranker.
+
+Given a user query and candidate text chunks, return ONLY a JSON array of chunk IDs ordered from most to least relevant for answering the query.
+
+Rules:
+- Use only the chunk IDs provided below.
+- Include at most {{maxResults}} IDs — return fewer if fewer candidates are genuinely relevant. Do not pad the list.
+- Prefer chunks that directly answer the query with concrete legal facts, dates, parties, sections, orders, or amounts.
+- Exclude chunks that are only boilerplate, headers, or tangential context.
+
+Query:
+{{query}}
+
+Candidates:
+{{candidates}}
+
+Respond with JSON only, e.g. ["uuid-1","uuid-2"]

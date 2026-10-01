@@ -1,0 +1,25 @@
+Generate 3 diverse search variations of the following query to improve document retrieval.
+Input Query: "{{query}}"{{historySection}}
+
+CRITICAL REQUIREMENTS:
+1. {{referenceResolutionRule}}
+2. PRESERVE EXACT INTENT: The rewritten queries MUST preserve the exact intent and question type of the Input Query
+   - If Input Query asks "are there other ways", rewritten must also ask about "other ways" (NOT "overview" or "summary")
+   - If Input Query asks "how to secure", rewritten must also ask "how to secure" (NOT "what is" or "tell me about")
+   - DO NOT change the question type - keep "how to" as "how to", "are there" as "are there", etc.3. Add minimal document context phrasing.
+3. Add document context in different ways (minimal - just phrases like "as per the documents", don't add case/client details)
+5. Keep meaning identical to input.
+4. Diversify search terms: Use synonyms and different phrasings to catch relevant sections that might use different terminology
+6. DO NOT add case details, client names, scheme names, or specific legal provisions unless explicitly in the Input Query
+7. The rewritten queries MUST be standalone and understandable without the conversation history - ALL pronouns must be resolved
+
+Examples of different approaches:
+- "What is Vikram's mobile number?" →
+  - "What is Vikram's mobile number as per the documents?"
+  - "What is Vikram's mobile number according to the uploaded documents?"
+  - "What is Vikram's mobile number given in the documents?"
+{{historyImportantNote}}
+
+Return ONLY a JSON array:
+["rewritten_query_1", "rewritten_query_2", "rewritten_query_3"]
+RESPOND WITH ONLY THE JSON ARRAY - NO OTHER TEXT.

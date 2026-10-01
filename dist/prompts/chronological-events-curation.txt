@@ -1,0 +1,50 @@
+You are curating a unified case chronology from already-extracted events across multiple documents in a legal case file.
+
+[CRITICAL: Respond ONLY with the JSON output block. No commentary, no preamble.]
+
+User query: {{userQuery}}
+Curation scope: {{scope}}
+
+Input events:
+{{eventsJson}}
+
+TASK:
+1. **Deduplicate & Merge:** Find events that describe the same real-world occurrence across different documents, merge them into a single entry, and combine their "source_files".
+2. **Anchor the Timeline (Discard Distant Background):** 
+   - Automatically discard distant, non-substantive historical background dates (such as a party's Date of Birth, company incorporation decades prior, or original tax registrations from years ago, etc.) *unless* the user's query specifically asks about age, incorporation, or registration validity.
+   - Start the timeline at the first material transaction or incident directly related to the active dispute (e.g., the contract in question, the tax year under audit, the incident of injury, or the first active breach). This prevents awkward multi-decade gaps and keeps the timeline tight and logical.
+3. **Keep Unique Material History:** Do NOT delete unique, substantive milestones that occurred during the active timeline of the dispute (e.g., agreements to vacate, payment defaults, police complaints, or actual contract executions relevant to the claim).
+4. **Filter True Noise Only:** Discard pure administrative/system noise (e.g., "document uploaded to system", "scanned by admin", "index page compiled", "folder created", etc.) or events that are completely irrelevant to the case file.
+5. **Scope Control:**
+   - scope "full" → Keep all unique factual, transactional, and court events to build the complete, relevant narrative.
+   - scope "scoped" → Keep only events that directly relate to the user's specific query ({{userQuery}}).
+
+MERGING RULES (Be Conservative):
+- Treat two events as the SAME occurrence only if they share the same date AND the same type of action.
+- If sources describe the same real-world event but disagree on dates or details, do NOT silently pick one. Merge them into a single entry, prefix the description with "[CONFLICT]", and explain both versions.
+- Combine all matching filenames into one "source_files" array.
+
+NARRATIVE WRITING:
+- Write cohesive, professionally drafted prose. 
+- Ensure each description reads as one clear factual sentence (or two short sentences) that preserves legal precision (parties, amounts, section references).
+- If the extracted event description already contains temporal qualifiers like "[Approx. Month Nov 2024]" or "[Year 2021]", preserve those prefixes in your final description.
+
+ORDERING:
+- Sort "curated_events" by date, OLDEST first (ascending — earliest date at index 0, most recent last).
+- Entries with a null date go at the very end.
+
+RULES:
+- Dates → "DD-MM-YYYY". Year-only → "01-01-YYYY" and prefix description with "[Year YYYY]". Month+year only → "01-MM-YYYY" and prefix with "[Approx. Month YYYY]".
+- Preserve filenames in "source_files" exactly as given.
+- Never invent dates or outcomes. Trust the input events.
+
+Return ONLY this JSON shape:
+{
+  "curated_events": [
+    {
+      "date": "string or null",
+      "event_description": "string",
+      "source_files": ["file1.pdf", "file2.pdf"]
+    }
+  ]
+}

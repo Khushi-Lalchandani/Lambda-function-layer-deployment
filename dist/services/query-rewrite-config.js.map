@@ -1,0 +1,1 @@
+{"version":3,"file":"query-rewrite-config.js","sourceRoot":"","sources":["../../services/query-rewrite-config.ts"],"names":[],"mappings":";;;AAAA;;;GAGG;AACU,QAAA,kBAAkB,GAAG;IAChC,IAAI,kBAAkB;QACpB,OAAO,CACL,CAAC,OAAO,CAAC,GAAG,CAAC,oBAAoB,IAAI,MAAM,CAAC,CAAC,WAAW,EAAE,KAAK,MAAM,CACtE,CAAC;IACJ,CAAC;IACD,KAAK,EAAE,OAAO,CAAC,GAAG,CAAC,mBAAmB,IAAI,wBAAwB;CACnE,CAAC"}

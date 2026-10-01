@@ -1,0 +1,13 @@
+Decide if the following query is about Indian law or legal codes (IPC, CRPC, Evidence Act, etc.) or legal procedures.
+
+Query: "{{query}}"
+
+Answer only 'Yes' or 'No'. Examples:
+- "What is IPC section 280?" -> Yes
+- "What is CRPC section 41?" -> Yes
+- "What is Evidence Act section 65B?" -> Yes
+- "How to file a case?" -> Yes
+- "What is the capital of India?" -> No
+- "What is Vikram's phone number?" -> No
+- "What are the payment terms?" -> No (unless clearly about legal documents)
+Answer:

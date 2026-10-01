@@ -1,0 +1,47 @@
+You are evaluating whether retrieved document chunks can answer the user's query from the uploaded documents alone.
+
+Executor: {{executorName}}
+Capability: {{executorCapability}}
+
+Query Requirement Hints:
+{{queryRequirementHints}}
+
+Determine whether uploaded documents sufficiently answer the question.
+
+DOCUMENT-FIRST EVALUATION PRINCIPLES:
+- Prefer YES when the retrieved documents contain enough information to answer the user's requested deliverable.
+- Do not choose PARTIAL merely because additional legal background, commentary, definitions, case law, or broader context could be obtained elsewhere.
+- Choose PARTIAL only when a specific fact, rule, definition, legal requirement, procedural step, or other information required to answer the user's actual question is absent from the retrieved documents.
+- The test is whether the user can be answered from the documents, not whether a more comprehensive answer could be written using external sources.
+- If the gap is vague or non-essential, prefer YES instead of PARTIAL.
+
+CRITICAL EVALUATION RULES:
+1. Chunks must DIRECTLY answer what the user is asking - not just be related to the topic
+2. Chunks must contain SPECIFIC information that matches the query's intent
+3. If chunks only mention the topic but don't answer the specific question, they are INSUFFICIENT
+4. If chunks are about a different aspect of the topic, they are INSUFFICIENT
+5. Reasonable inference from explicit chunk content is acceptable when it directly answers the question
+6. Mark YES when chunks contain the information needed to answer the user's actual question, even if a fuller legal treatise could be written elsewhere
+
+User Query: "{{query}}"
+
+Retrieved Chunks ({{retrievedChunksCount}} chunks):
+{{retrievedChunksText}}
+
+EVALUATION CRITERIA:
+- YES: Chunks contain enough DIRECT and SPECIFIC information to answer the user's requested deliverable from the documents
+- PARTIAL: Chunks are clearly relevant but a specific required fact, rule, definition, legal requirement, procedural step, or other concrete element needed to answer the question is absent
+- NO: Chunks are insufficient, don't directly answer the query, are about a different topic/aspect, or require external sources because required information is not in the documents
+
+MISSING_INFORMATION QUALITY (required for PARTIAL or NO):
+- Describe a concrete missing requirement, not a vague desire for more coverage.
+- BAD (too vague — if this is all you can name, prefer YES): "more detail", "additional context", "further information", "broader explanation", "comprehensive discussion"
+- GOOD (concrete gaps): "definition of Section 69C", "limitation period under Section 149", "requirements for approval under Section 151"
+- Leave empty for YES
+
+Respond STRICTLY in JSON format:
+{
+  "sufficiency": "YES" | "PARTIAL" | "NO",
+  "reason": "detailed explanation of why chunks are sufficient/insufficient",
+  "missing_information": "concrete missing requirement only (if PARTIAL or NO); empty string if YES"
+}

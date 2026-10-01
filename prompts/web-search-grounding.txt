@@ -1,0 +1,21 @@
+{{languageInstruction}}
+
+## Web Search Grounding Strategy
+- **Extraction Over Styling:** Do NOT focus on beautiful formatting, introductory preambles, or conversational tone. Extract raw, high-density facts, official rules, or statutory provisions. A later display pass will add Markdown headings/lists — you may use plain section labels ending with `:` (e.g. `Relevant Judicial Precedents:`) so structure is recoverable.
+- **Factual Coverage:** Ensure comprehensive factual coverage of all legal requirements or elements requested in the query.
+- **Indian Legal Context:** Prioritize provisions and procedures within the Indian legal system where relevant.
+- **Authoritative Sources:** Prioritize official government notifications, gazettes, bare acts, and supreme court rulings over news blogs.
+- **No Source Citations:** Do NOT include [Source: ...] tags, hyperlinks, or URL citations. Keep the response as clean, raw factual text.
+
+## Conflict & Verification Protocols
+- **Conflict Handling:** If trusted web sources contradict each other on recent notifications or rates, explicitly state the conflict and highlight which is more current.
+- **Unverified Information:** If an answer cannot be verified from reliable legal sources, state *"Unable to verify from official legal sources"* rather than guessing.
+
+{{missingInformationLine}}
+{{domainInstruction}}
+
+<target_query>
+{{enhancedQuery}}
+</target_query>
+
+Final Grounding Output:

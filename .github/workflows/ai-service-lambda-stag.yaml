@@ -1,0 +1,209 @@
+# name: Deploy to AWS Lambda
+
+# on:
+#   push:
+#     branches:
+#       - ai-service-lambda-stag
+#   workflow_dispatch:
+
+# env:
+#   AWS_REGION: ap-south-1             
+#   LAMBDA_FUNCTION_NAME: ai-service-stag
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout source code
+#         uses: actions/checkout@v4
+
+#       - name: Zip Lambda code
+#         run: zip -r function.zip . -x "*.git*" "*.github*" "node_modules/aws-sdk/*"
+
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ env.AWS_REGION }}
+
+#       - name: Update Lambda function code
+#         run: |
+#           aws lambda update-function-code \
+#             --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
+#             --zip-file fileb://function.zip
+
+#       - name: Verify deployment
+#         run: aws lambda get-function --function-name ${{ env.LAMBDA_FUNCTION_NAME }}
+
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - lambda-deployment-practice
+  workflow_dispatch:
+
+env:
+  AWS_REGION: ap-south-1
+  LAMBDA_FUNCTION_NAME: ai-service-stag
+  LAMBDA_LAYER_NAME: ai-service-stag-dependencies
+  NODE_VERSION: "20"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Confirm compiled handler
+        run: test -f dist/lambda-handler.js
+
+      - name: Check for dependency changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            deps:
+              - 'package.json'
+              - 'package-lock.json'
+
+      - name: Create Lambda layer with production dependencies
+        if: steps.filter.outputs.deps == 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p layer/nodejs
+          cp package.json package-lock.json layer/nodejs/
+          (
+            cd layer/nodejs
+            npm ci --omit=dev --ignore-scripts
+          )
+          # Declared in package.json, but the compiled handler never requires them.
+          # @prisma/client is unused, so no prisma generate or query engine is needed.
+          # aws-lambda is a type import erased by tsc.
+          rm -rf \
+            layer/nodejs/node_modules/@prisma \
+            layer/nodejs/node_modules/.prisma \
+            layer/nodejs/node_modules/prisma \
+            layer/nodejs/node_modules/aws-lambda
+          test -d layer/nodejs/node_modules/@aws-sdk/client-secrets-manager
+          test -d layer/nodejs/node_modules/@google/genai
+          test -d layer/nodejs/node_modules/@nestjs/common
+          test -d layer/nodejs/node_modules/aws-sdk
+          test -d layer/nodejs/node_modules/axios
+          test -d layer/nodejs/node_modules/openai
+
+      - name: Zip Lambda layer
+        if: steps.filter.outputs.deps == 'true'
+        run: |
+          set -euo pipefail
+          (
+            cd layer
+            zip -r ../layer.zip nodejs -x "nodejs/package-lock.json"
+          )
+          SIZE=$(stat -c%s layer.zip)
+          if [ "$SIZE" -gt 50000000 ]; then
+            echo "Layer zip is ${SIZE} bytes and exceeds the 50 MB direct-upload limit."
+            exit 1
+          fi
+
+      - name: Zip Lambda function
+        run: |
+          set -euo pipefail
+          zip -r function.zip dist prompts package.json
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Publish Lambda layer
+        id: publish_layer
+        if: steps.filter.outputs.deps == 'true'
+        run: |
+          set -euo pipefail
+          LAYER_VERSION_ARN=$(aws lambda publish-layer-version \
+            --layer-name "$LAMBDA_LAYER_NAME" \
+            --description "Production Node.js dependencies for ${LAMBDA_FUNCTION_NAME}" \
+            --zip-file fileb://layer.zip \
+            --compatible-runtimes nodejs20.x \
+            --query LayerVersionArn \
+            --output text)
+          if [ -z "$LAYER_VERSION_ARN" ] || [ "$LAYER_VERSION_ARN" = "None" ]; then
+            echo "Lambda layer publish did not return a version ARN."
+            exit 1
+          fi
+          echo "Published layer version: $LAYER_VERSION_ARN"
+          echo "layer_version_arn=$LAYER_VERSION_ARN" >> "$GITHUB_OUTPUT"
+
+      - name: Update Lambda function code
+        run: |
+          set -euo pipefail
+          aws lambda update-function-code \
+            --function-name "$LAMBDA_FUNCTION_NAME" \
+            --zip-file fileb://function.zip
+
+      - name: Wait for function code update
+        run: |
+          set -euo pipefail
+          aws lambda wait function-updated \
+            --function-name "$LAMBDA_FUNCTION_NAME"
+
+      - name: Attach Lambda layer
+        if: steps.filter.outputs.deps == 'true'
+        run: |
+          set -euo pipefail
+          aws lambda update-function-configuration \
+            --function-name "$LAMBDA_FUNCTION_NAME" \
+            --layers "${{ steps.publish_layer.outputs.layer_version_arn }}"
+
+      - name: Wait for function configuration update
+        if: steps.filter.outputs.deps == 'true'
+        run: |
+          set -euo pipefail
+          aws lambda wait function-updated \
+            --function-name "$LAMBDA_FUNCTION_NAME"
+
+      - name: Verify deployment
+        run: |
+          set -euo pipefail
+          aws lambda get-function-configuration \
+            --function-name "$LAMBDA_FUNCTION_NAME" \
+            --query "{FunctionName:FunctionName,Runtime:Runtime,Handler:Handler,LastUpdateStatus:LastUpdateStatus,State:State,Layers:Layers}" \
+            --output json
+          STATUS=$(aws lambda get-function-configuration \
+            --function-name "$LAMBDA_FUNCTION_NAME" \
+            --query LastUpdateStatus \
+            --output text)
+          if [ "$STATUS" != "Successful" ]; then
+            echo "Lambda update status is ${STATUS}."
+            exit 1
+          fi
+          if [ "${{ steps.filter.outputs.deps }}" == "true" ]; then
+            ATTACHED=$(aws lambda get-function-configuration \
+              --function-name "$LAMBDA_FUNCTION_NAME" \
+              --query "contains(Layers[].Arn, '${{ steps.publish_layer.outputs.layer_version_arn }}')" \
+              --output text)
+            if [ "$ATTACHED" != "True" ]; then
+              echo "Published layer is not attached to ${LAMBDA_FUNCTION_NAME}."
+              exit 1
+            fi
+          fi
+

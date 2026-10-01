@@ -1,0 +1,33 @@
+
+Previous conversation context:
+{{chatHistory}}
+
+CRITICAL: If the current query contains pronouns, ordinal references, ambiguous references, or procedural follow-up questions, resolve them using conversation history.
+1. **PRONOUNS (CRITICAL)**: If the query contains pronouns (it, he, she, they, this, that, etc.), you MUST:
+   - FIRST: Look at the MOST RECENT assistant response in the conversation history to identify what entity was being discussed
+   - SECOND: If not found in the most recent assistant response, look at the most recent user query
+   - Replace the pronoun with the ACTUAL ENTITY NAME (e.g., "it" → "form 4", "Section 80C", "the writ petition")
+   - Example: If the conversation was:
+     * User: "how to secure form 4?"
+     * Assistant: "Here are ways to secure form 4: 1. ... 2. ..."
+     * User: "are there any other ways to secure it? kindly think hard"
+     * Then "it" MUST be resolved to "form 4" → enhanced query: "are there any other ways to secure form 4? kindly think hard"
+   - Another example: If assistant mentioned "Section 80C" and user asks "how to save tax with it?" → enhanced query: "how to save tax with Section 80C?"
+2. **ORDINAL REFERENCES**: If the query references numbered points, options, or items from a previous assistant response (e.g., "the 4th point", "the first option", "option 2", "the second approach", "point 3", "the third one"), you MUST:
+   - Look at the most recent assistant response in the conversation history
+   - Find the specific numbered item/point/option being referenced
+   - Extract the ACTUAL CONTENT of that point and include it in the enhanced query
+   - Example: If user says "tell me more about the 4th point" and the 4th point in assistant's response was about "filing a writ petition", the enhanced query should be: "tell me more about filing a writ petition and what are the practical steps involved"
+3. **FOLLOW-UP PROCEDURAL QUESTIONS (CRITICAL)**: If the query asks procedural questions like "what has to be done?", "what needs to be done?", "what should be done?", "what can be done?", "what must be done?", etc., you MUST:
+   - FIRST: Look at the MOST RECENT assistant response to identify what topic/issue was being discussed
+   - SECOND: The enhanced query should ask about actions/steps related to THAT SPECIFIC TOPIC from the assistant's response, NOT a general case summary
+   - DO NOT turn procedural queries into summary requests - keep them as procedural queries asking for actions/steps
+   - Example: If assistant previously discussed "delay in processing visa application" and user asks "what has to be done?" → enhanced query: "what has to be done regarding delay in processing visa application?" (NOT "Provide a summary of the case...")
+   - Example: If assistant discussed "form 4 security measures" and user asks "what needs to be done?" → enhanced query: "what needs to be done to secure form 4?" (NOT a case summary)
+4. **FOLLOW-UP QUESTIONS**: If the query asks for "more info", "other ways", "detail", "explain further", "think harder", "think hard", etc., you MUST:
+   - Identify WHAT topic/concept it is asking more about by looking at the most recent assistant response
+   - If the query contains "it", "this", or "that", resolve these pronouns first using step 1 above
+   - Ensure the enhanced query explicitly mentions the topic being asked about
+   - Example: "are there any other ways to secure it?" (where assistant previously discussed "form 4") → enhanced query: "are there any other ways to secure form 4?"
+5. **CONTEXT PRESERVATION**: Do NOT refer back to the general case overview if the most recent turn was about a specific topic. Stay focused on what was just discussed.
+6. **MAKE IT STANDALONE**: The enhanced query should be fully understandable WITHOUT needing to see the conversation history. All pronouns and references must be resolved to actual entity names.

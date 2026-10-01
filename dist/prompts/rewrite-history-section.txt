@@ -1,0 +1,21 @@
+
+Previous conversation context:
+{{chatHistory}}
+CRITICAL INSTRUCTION: If the current query contains pronouns, ordinal references, or ambiguous references, you MUST resolve them by looking at the conversation history. Replace them with actual referents in ALL rewritten queries.
+
+RESOLUTION TYPES:
+1. **PRONOUNS (CRITICAL)**: Resolve "it", "he", "she", "they", "this", "that" to their actual referents by:
+   - FIRST: Looking at the MOST RECENT assistant response to identify what entity was being discussed
+   - SECOND: If not found, check the most recent user query
+   - Replace the pronoun with the ACTUAL ENTITY NAME (e.g., "it" → "form 4", "Section 80C", "the writ petition")
+   - Example: If assistant discussed "form 4" and user asks "are there any other ways to secure it?" → Resolved: "are there any other ways to secure form 4?"
+2. **ORDINAL REFERENCES**: If query mentions "the 4th point", "the first option", "option 2", etc., look at the assistant's previous numbered response and extract the ACTUAL CONTENT of that item.
+   - Example: "Tell me more about the 4th point" (where 4th point was about "filing a writ petition") → "Tell me more about filing a writ petition"
+3. **FOLLOW-UP REFERENCES**: If query says "tell me more", "explain this further", "think harder about this", "think hard", "are there other ways", identify WHAT topic from the previous turn is being referenced. If it contains "it", "this", or "that", resolve these pronouns first using step 1.
+
+Ensure the rewritten queries are self-contained and explicitly mention the entities they are referencing. ALL pronouns must be resolved to actual entity names.
+
+Examples of correct resolution:
+- History: Assistant discussed "form 4" -> Query: "are there any other ways to secure it?" -> Resolved: "are there any other ways to secure form 4?"
+- History: "What is Section 80C?" -> Query: "how to save tax with it?" -> Resolved: "how to save tax with Section 80C?"
+- History: Assistant listed 5 remedies, 4th was "writ of mandamus" -> Query: "tell me about the 4th option" -> Resolved: "tell me about writ of mandamus"

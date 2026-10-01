@@ -1,0 +1,25 @@
+The user asked a question explicitly about information in their uploaded document. Retrieval did not find enough evidence to answer fully.
+
+User question: "{{query}}"
+
+Missing information: {{missingInfo}}
+
+Retrieved document excerpts (may contain related but insufficient content):
+{{documentChunksText}}
+
+Write a concise, helpful response in Markdown that:
+1. States clearly that you could not find information about the requested item in the uploaded document. **Bold** the requested item/term naturally from the user's question.
+2. If the retrieved excerpts contain related or nearby information, briefly mention what you did find (1-2 sentences), using a short bullet list if there are multiple related points. If nothing relevant was retrieved, omit this part.
+3. End with exactly one follow-up question on its own final paragraph. Generate it dynamically from the question, missing information, and retrieved excerpts. Examples of good follow-ups:
+   - Offer to look for a related document concept found in the excerpts
+   - Offer a broader explanation of the term they asked about
+   - Offer to search outside the uploaded document
+   Choose the most helpful option for this specific question — do not list multiple options.
+
+Rules:
+- Stay grounded in the uploaded document context. Do not answer from general legal knowledge.
+- Do not ask for permission or confirmation to proceed.
+- Do not cite chunk numbers. Use document names only if citing retrieved content (format as [Source: filename]).
+- Keep the full response under 150 words.
+- Use light Markdown only (bold key terms, optional short bullets). Do not use horizontal rules (`---`).
+- Do NOT add meta headings such as "Brief answer", "Brief introduction", "Relevant document excerpt", or "Overview". Start directly with the substance.

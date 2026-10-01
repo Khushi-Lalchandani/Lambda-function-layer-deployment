@@ -1,0 +1,132 @@
+{
+    "success": true,
+    "statusCode": 200,
+    "message": "Chat history retrieved successfully",
+    "data": {
+        "chat": {
+            "id": "db08e5e3-fc28-4444-bbf4-a9f54aef9f0e",
+            "title": "Give me the chronology of the entire case.",
+            "caseId": "376bf30f-ca3a-427d-88bc-7d59db9e812b",
+            "documentIds": [
+                {
+                    "id": "24923889-72e3-482d-980f-ff8b972aaa12",
+                    "originalName": "Letter.docx",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/bfe68f6d-4e3d-4fa9-9e5a-4f30eff63dca.docx?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=a8d32ec6177886659fa3cadc59d1a67e2bbf24f71c02b384f25e1efb61eee7f9&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "7fc05339-140f-4f68-a661-9850b1da39f0",
+                    "originalName": "FC Metting Notice 18-01-2023.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/e0ad1b6d-411f-4891-b5b7-ba6bf3c5f407.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=2d2215b7c17d17a5a7015e58c3d490ab056458d827900f0a70a49b374355b337&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "96646523-e416-41ab-8749-4794820874cd",
+                    "originalName": "cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/e254b5b1-20f4-49f0-8bca-641fffb5aea4.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=2315603057ef9b67d8ee6bf5c0f58f959b6e9364f79e7ebe6ace7ee91ceb0685&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "af81eda9-4f99-4805-abf6-d202bfd494e7",
+                    "originalName": "fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/25d04da0-1102-47c6-95b4-103ce8dfce41.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=d6ac4b58fc3132a4127302205100fc4cdfb9aeec0cef4134d3a933d4769fc153&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "bd2f1c3a-202c-4434-9f19-884a7beb0920",
+                    "originalName": "Summons Summary.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/385c4b97-2782-43e0-aafb-bd2f01ead420.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=7c0b776c4bf4ed8c19d815eb015137fd46b5a21a08bffc79e2fdaaa5144905cc&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "c6ef562b-8bad-46f9-b299-c9894e103a22",
+                    "originalName": "cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/0f158fc5-dab9-4e1d-94a9-10baf78eb625.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=16037c1a3f7e0fe6eaaa934979505f6b8507ba0624a13400b6e8e86bc4a0cce6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                },
+                {
+                    "id": "25577b53-5ee5-4849-9923-74359a66563a",
+                    "originalName": "cf843afd-f087-43e2-abbd-fd0b6519411b.pdf",
+                    "doc": "https://simplcase.s3.ap-south-1.amazonaws.com/documents/ef6938a6-4c07-4928-a1be-c47c2a24b4a9.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIASAZ4PY2EXQP5J56F%2F20260928%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20260928T121332Z&X-Amz-Expires=86400&X-Amz-Signature=33f63f32ea5f41e2eb1ce40afb1c66b7365a4c3b4c06d35223f0bd8cf33f86e4&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+                }
+            ],
+            "history": [
+                {
+                    "id": "f6a861e7-d30b-4e4b-b452-657ac49aebdf",
+                    "messageType": "user",
+                    "content": "Give me the chronology of the entire case.",
+                    "queryStrategy": null,
+                    "confidenceScore": null,
+                    "fileName": null,
+                    "sessionId": "21e1b709-b4c9-445f-8835-e00e4850120e",
+                    "createdAt": "2026-09-28T06:41:56.778Z"
+                },
+                {
+                    "id": "0ea4be7f-64ea-453c-898c-96972d95ea43",
+                    "messageType": "assistant",
+                    "content": "Below is the chronological sequence of events extracted from the document, arranged from the earliest to the most recent. Each entry includes a source citation for your reference.\n\n| Date | Event Description |\n| --- | --- |\n| 01-04-2019 | [Year 2019] The assessee conducted high-value transactions including cash deposits and credit card payments totaling approximately Rs. 79.73 lakhs which were not disclosed in a return of income. [Source: cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf] |\n| 26-05-2020 | A payment of Rs. 50,000.00 was received via IMPS to credit the account. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 29-05-2020 | Multiple high-value transactions were initiated at Nostragamus Bangalore totaling Rs. 27,600.00, marked for EMI conversion. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 04-06-2020 | A payment of Rs. 25,000.00 was received via IMPS. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 08-06-2020 | A payment of Rs. 24,695.39 was received via IMPS, contributing to the total settlement of the previous balance. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 14-06-2020 | Final high-value transactions at Nostragamus Bangalore for the period occurred, bringing the total monthly spend to Rs. 95,317.00. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 25-06-2020 | A statement was issued for the period 26-May-2020 to 25-Jun-2020 showing a total outstanding balance of Rs. 95,258.00. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 26-06-2020 | The monthly billing cycle for the Kotak Credit Card account commenced, ending 25-Jul-2020. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 27-06-2020 | Multiple transactions at Nostragamus Bangalore IN occurred totaling Rs. 16,109, including two charges of Rs. 5,555 each flagged for EMI conversion. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 28-06-2020 | A payment of Rs. 50,000 was received via Kotak IMPS and a purchase of Rs. 8,000 at Nostragamus Bangalore IN was flagged for EMI conversion. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 29-06-2020 | High-volume spending at Nostragamus Bangalore IN occurred totaling Rs. 51,700 across five transactions, all flagged for EMI conversion. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 30-06-2020 | Final high-value purchases at Nostragamus Bangalore IN occurred totaling Rs. 23,400 flagged for EMI conversion. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 13-07-2020 | The due date for the payment of the total outstanding amount of Rs. 95,258.00 occurred. [Source: cb4790aa-bd39-4250-8374-3e6e83ef7b52.pdf] |\n| 12-08-2020 | The due date for the payment of the total outstanding amount of Rs. 94,099.00 occurred to avoid interest charges. [Source: cf843afd-f087-43e2-abbd-fd0b6519411b.pdf] |\n| 18-01-2023 | The Micro and Small Enterprise Facilitation Council (MSEFC), Ajmer Division, issued a formal notice for its 10th meeting to address multiple pending commercial disputes. [Source: FC Metting Notice 18-01-2023.pdf] |\n| 24-01-2023 | The 10th meeting of the MSEFC was held at the District Industries Centre, Ajmer, to hear and potentially decide on the listed cases involving various industrial units. [Source: FC Metting Notice 18-01-2023.pdf] |\n| 21-03-2024 | The Income Tax Department issued a show-cause notice u/s 148A(b) to the assessee regarding income escaping assessment for AY 2020-21. [Source: cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf] |\n| 31-03-2024 | The Department issued a letter to the assessee granting an extension of time until 30-04-2024 to respond to the show-cause notice. [Source: cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf] |\n| 02-05-2024 | The Specified Authority (CIT, Bengaluru) granted formal approval for the issuance of the order under Section 148A(d). [Source: cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf] |\n| 03-05-2024 | The Income Tax Officer passed the order u/s 148A(d) concluding that income has escaped assessment and the case is fit for reopening under Section 148. [Source: cec4a70a-60de-4615-82ab-a10cc45fc0ce.pdf] |\n| 22-07-2024 | Execution of a Deed of Lease by Respondent No. 2 in favor of the Applicant's director for commercial premises in Koramangala (Document No. 6). [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 01-11-2024 | [Approx. Month Nov 2024] Commencement of the 12-month rent payment cycle by the Applicant company. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 01-10-2025 | [Approx. Month Oct 2025] Conclusion of the rent payment period, with the Applicant having paid a total of Rs. 20,13,000 in rent and Rs. 49,500 in TDS. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 28-10-2025 | Parties mutually agreed that the Applicant would vacate the suit schedule property due to financial setbacks. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 28-11-2025 | Execution of a Purchase Agreement by Respondent No. 1 for the acquisition of the Applicant's interior fixtures and furniture for Rs. 6,50,000 (Document No. 9). [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 10-12-2025 | Due date for the first installment of Rs. 2,00,000 under the Purchase Agreement, which the Respondents failed to pay. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 25-12-2025 | Due date for the second installment of Rs. 2,00,000 under the Purchase Agreement, which remained unpaid. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 29-12-2025 | Respondent No. 1 executed a handwritten agreement to clear all dues by 07-01-2026, failing which the Applicant could sell the interiors (Document No. 10). [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 07-01-2026 | Deadline for payment under the handwritten agreement; Respondents allegedly threatened and coerced the Applicant upon a request for payment clearance. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 09-01-2026 | Koramangala Police Station issued an acknowledgment after Respondents agreed to pay the liable amount of Rs. 6,50,000 following a police summons (Document No. 11). [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 10-01-2026 | Final due date for the third installment of Rs. 2,50,000 and the deadline for the entire payment cycle under the Purchase Agreement. [Source: fc319197-4f63-4a25-915a-4f3aabcde7eb.pdf] |\n| 01-07-2026 | Summons issued to ABC Infrastructure Private Limited by the Court of Civil Judge, Ahmedabad, initiating formal notice of the suit filed by Sadhav Engineering Limited. [Source: Summons Summary.pdf] |\n| 20-07-2026 | Scheduled hearing date for ABC Infrastructure Private Limited to appear and respond to the suit regarding contractual dispute and recovery of payments. [Source: Summons Summary.pdf] |\n\nPlease let me know if you need further details or assistance with this case chronology.",
+                    "queryStrategy": "metadata",
+                    "confidenceScore": 0.85,
+                    "fileName": null,
+                    "sessionId": "21e1b709-b4c9-445f-8835-e00e4850120e",
+                    "createdAt": "2026-09-28T06:41:56.828Z"
+                },
+                {
+                    "id": "efdee79a-f87f-48ec-9b10-5583c817313a",
+                    "messageType": "user",
+                    "content": "yes tell me about 10th meeting of the MSEFC in summerize",
+                    "queryStrategy": null,
+                    "confidenceScore": null,
+                    "fileName": null,
+                    "sessionId": "47919c13-7f93-4a23-bc3a-13c4c0a00790",
+                    "createdAt": "2026-09-28T06:43:36.221Z"
+                },
+                {
+                    "id": "1677436f-0f08-4a44-84e2-2494ff4c0a66",
+                    "messageType": "assistant",
+                    "content": "## Summary — 10th Meeting of the MSEFC\n\nA concise summary of the 10th meeting as set out in the case chronology:\n\n### Meeting details\n- **Date:** 24-01-2023 [Source: FC Metting Notice 18-01-2023.pdf]\n- **Venue:** Meeting Hall, Office of the District Industries Centre, Ajmer. [Source: FC Metting Notice 18-01-2023.pdf]\n- **Chair:** Shri S.S. Shah (Additional Director, Industries). [Source: FC Metting Notice 18-01-2023.pdf]\n\n### Purpose / Agenda\n- The Council convened to present, hear, and review pending commercial dispute cases of listed industrial units.\n- Units were directed to appear through a maximum of two authorized representatives. [Source: FC Metting Notice 18-01-2023.pdf]\n\n### Parties and types of disputes\n- **Applicants / Units:** M/s Fine Prestress; Veenam Shukla (VR Infrapower PVT LTD); Ms SGG Cement Products Private Limited; Mahadev Minerals; Kishangarh Granites Private Limited; HR DS Marketing; DRS Marketing; Morbi Tiles Depo; Tiles House. [Source: FC Metting Notice 18-01-2023.pdf]\n- **Respondents:** State electricity distribution corporations (Jaipur Vidyut Vitran Nigam Ltd, AVVNL, MPPKVVCL); cooperative sugar mills (The Kishan Sahkari Chinni Mills Ltd of Budaun, Mahumudabad, Puranpur, Satha, Tilhar); and various private firms including Balaji Steel Industries, Divija Constructions, Shri Gurukripa Enterprises, Nimmagadda Industries, GSR Eco Bricks Pvt Ltd, Tripti Hi-Tech Blocks, and JSE Infotech Pvt Ltd. [Source: FC Metting Notice 18-01-2023.pdf]\n\n### Outcomes / Procedural notes\n- The document provided is a preliminary meeting notice and does not record final outcomes or merits of decisions.\n- It specifies that ex-parte decisions may be passed against any party failing to appear before the Council. [Source: FC Metting Notice 18-01-2023.pdf]\n\nIf you need this converted into a short table or want the notice text quoted verbatim, I can provide that next.",
+                    "queryStrategy": "vector",
+                    "confidenceScore": 0.85,
+                    "fileName": null,
+                    "sessionId": "47919c13-7f93-4a23-bc3a-13c4c0a00790",
+                    "createdAt": "2026-09-28T06:43:36.234Z"
+                },
+                {
+                    "id": "42ad6a3a-b12a-4e8b-93a4-77f2aaaf2f6b",
+                    "messageType": "user",
+                    "content": "yes",
+                    "queryStrategy": null,
+                    "confidenceScore": null,
+                    "fileName": null,
+                    "sessionId": "dee4538a-2b30-478f-9a56-572de4148117",
+                    "createdAt": "2026-09-28T06:44:21.960Z"
+                },
+                {
+                    "id": "c9e12c19-cb74-45bb-9b1b-588a968c8ac5",
+                    "messageType": "assistant",
+                    "content": "## Brief response\n\nBelow is the requested short, structured presentation of the 10th meeting summary of the MSEFC.\n\n| Meeting Element | Description |\n| --- | --- |\n| **Council Name** | Micro and Small Enterprise Facilitation Council (MSEFC), Ajmer Division [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Meeting Number** | 10th Meeting [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Notice Date** | 18-01-2023 [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Meeting Date & Time** | 24-01-2023 at 11:00 AM [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Chairman** | Shri S.S. Shah, Additional Director, Industries [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Venue** | Meeting Hall, Office of District Industries Centre, Ajmer [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Invited Members** | 1. Lead Bank Officer, District Level Bankers Committee, Ajmer<br>2. Branch Manager, Rajasthan Financial Corporation, Kishangarh, Ajmer [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Agenda & Instructions** | Cases of the respective units will be presented; each unit is directed to present its case through a maximum of two authorized representatives. [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Consequence of Absence** | An ex-parte decision may be taken if the authorized representative fails to appear. [Source: FC Metting Notice 18-01-2023.pdf] |\n| **Issuing Authority** | D.K. Sharma, Joint Director, Industries and Officer-in-Charge, Facilitation Council, Ajmer Division [Source: FC Metting Notice 18-01-2023.pdf] |\n\nIf you need this converted into a different format (PDF, CSV, or editable table) or want additional emphasis on specific agenda items, tell me which format or items to prioritize.",
+                    "queryStrategy": "vector",
+                    "confidenceScore": 0.85,
+                    "fileName": null,
+                    "sessionId": "dee4538a-2b30-478f-9a56-572de4148117",
+                    "createdAt": "2026-09-28T06:44:21.974Z"
+                },
+                {
+                    "id": "3d3b7982-8337-4d92-b10d-3529646ee015",
+                    "messageType": "user",
+                    "content": "can you find relevant judgements on the web that support my case?",
+                    "queryStrategy": null,
+                    "confidenceScore": null,
+                    "fileName": null,
+                    "sessionId": "5c059fca-f83b-4ce2-93fa-37566398875d",
+                    "createdAt": "2026-09-28T12:12:48.341Z"
+                },
+                {
+                    "id": "78094901-e272-4753-8154-7e57219105db",
+                    "messageType": "assistant",
+                    "content": "Prerequisites and Important Notes:\nThe following legal principles are based on the Income Tax Act, 1961, as amended by the Finance Act, 2021, and subsequent judicial interpretations. The core issue in your case involves the timing of the Specified Authority's approval (Section 148A(d)) relative to the order passed. If the approval was granted after the order was passed, or if the process was rushed despite an extension, these precedents are highly relevant.\n\nSteps to Challenge the Reopening Order:\n\n1. Verify the Date of Approval vs. Date of Order: Check if the approval under Section 151 (via Section 148A) was obtained before the order under Section 148A(d) was passed. If the approval is dated 02-05-2024 and the order is dated 03-05-2024, ensure the order was not pre-dated or passed without application of mind.\n2. Analyze the Show-Cause Notice (SCN) Compliance: Review whether the Assessing Officer (AO) considered your response submitted within the extended timeline (30-04-2024). If the AO ignored the response or failed to provide a reasonable opportunity to be heard, the order is liable to be quashed.\n3. Evaluate the Sufficiency of Reasons: Examine if the reasons recorded for reopening are based on tangible material or mere suspicion (e.g., cash deposits/EMI conversions). If the reasons are vague or lack a live link to income escapement, they fail the test of law.\n4. Challenge Procedural Lapses: If the AO failed to follow the mandatory procedure of Section 148A(b) or denied the extension granted, argue that the entire proceeding is void ab initio.\n\nRelevant Judicial Precedents:\n\n1. Ashish Agarwal vs. Union of India (Supreme Court): This landmark judgment mandates that the procedure under Section 148A must be strictly followed. Any order passed without complying with the show-cause notice requirements or without providing adequate time to the assessee is invalid.\n2. Keenara Industries Pvt. Ltd. vs. ITO (Gujarat High Court): This case emphasizes that the approval of the Specified Authority must be based on an independent application of mind. If the approval is mechanical or granted after the order is passed, the reopening is unsustainable.\n3. Anindita Sengupta vs. Union of India (Calcutta High Court): This judgment highlights that the AO must consider the assessee's reply to the show-cause notice. Failure to address the specific contentions raised by the assessee in the 148A(d) order renders the order non-speaking and arbitrary.\n4. Siemens Financial Services Pvt. Ltd. vs. Dy. CIT (Bombay High Court): This case clarifies that the reasons for reopening must be provided to the assessee, and the AO cannot rely on material not disclosed in the initial notice. It reinforces the requirement for a live link between the information and the belief of income escapement.\n\nKey Considerations for Your Case:\n\n*  Application of Mind: The approval dated 02-05-2024 must show that the CIT Bengaluru actually reviewed your response (submitted by 30-04-2024). If the approval was granted without considering your response, it is a procedural violation.\n*  Limitation Period: Ensure that the reopening for AY 2020-21 falls within the statutory time limits prescribed under Section 149.\n*  Materiality: For cash deposits and credit card EMI conversions, the AO must prove that these amounts represent undisclosed income and not merely capital receipts or explained transactions.\n*  Non-Speaking Orders: If the order under 148A(d) does not explicitly deal with the points raised in your response to the SCN, it is a non-speaking order and can be challenged on the grounds of violation of principles of natural justice.",
+                    "queryStrategy": "web_search",
+                    "confidenceScore": 0.85,
+                    "fileName": null,
+                    "sessionId": "5c059fca-f83b-4ce2-93fa-37566398875d",
+                    "createdAt": "2026-09-28T12:12:48.355Z"
+                }
+            ],
+            "transcriptions": []
+        }
+    }
+}

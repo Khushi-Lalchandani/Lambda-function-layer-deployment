@@ -1,0 +1,32 @@
+{
+  "name": "socket-ai-service-function",
+  "version": "1.0.0",
+  "description": "AI service Lambda function for SimplCase websocket chat",
+  "main": "handler.js",
+  "scripts": {
+    "build": "rimraf dist && tsc && node scripts/copy-prompts.js",
+    "deploy": "npm run build && serverless deploy",
+    "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "evaluate": "npm run build && node dist/evaluation/cli.js",
+    "benchmark:retrieval": "npm run build && node scripts/benchmark-retrieval.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1039.0",
+    "@google/genai": "^1.30.0",
+    "@nestjs/common": "^11.1.9",
+    "@prisma/client": "^5.22.0",
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.1693.0",
+    "axios": "^1.6.2",
+    "openai": "^4.77.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.130",
+    "@types/node": "^20.10.0",
+    "husky": "^9.0.0",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.9.3"
+  }
+}

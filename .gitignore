@@ -1,0 +1,13 @@
+/node_modules
+.env
+.env.example
+index.html
+ANAYLYSIS.md
+.history
+nestjs-backend
+python
+implement_md
+extraction/
+docs/
+evaluation/
+.cursor

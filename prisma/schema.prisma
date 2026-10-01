@@ -1,0 +1,389 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String           @id @default(uuid())
+  employeeCode         String?
+  name                 String
+  email                String           @unique
+  createdAt            DateTime         @default(now())
+  deletedAt            DateTime?
+  firmId               String?
+  profile              String?
+  hashPassword         String
+  isApproved           Boolean
+  isVerified           Boolean
+  lastLoginAt          DateTime?
+  mobile               String
+  otp                  Int?
+  otpCreatedAt         DateTime?
+  role                 Role
+  sessionToken         String?
+  updatedAt            DateTime         @updatedAt
+  designationId        String?
+  googleAccessToken    String?
+  googleRefreshToken   String?
+  googleTokenExpireIn  DateTime?
+  documentsFirstOpened Document[]       @relation("DocumentFirstOpenBy")
+  designation          Designation?     @relation(fields: [designationId], references: [id], onDelete: Cascade)
+  assignedCases        CaseAssign[]
+  tasksAssigned        Task[]           @relation("AssignedTasks")
+  documentAccess       DocumentAccess[]
+  ownedFirms           Firm[]           @relation("FirmOwner")
+  firm                 Firm?            @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  TaskComments         TaskComments[]
+  Chat                 Chat[]
+}
+
+model Designation {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model Firm {
+  id            String          @id @default(uuid())
+  firmName      String
+  address       String?
+  city          String?
+  state         String?
+  pincode       String?
+  isApproved    Boolean?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  deletedAt     DateTime?
+  noOfEmployees Int?
+  currentUsers  Int?            @default(1)
+  ownerId       String
+  cases         CaseDetail[]
+  clients       ClientDetails[]
+  owner         User            @relation("FirmOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  users         User[]
+  taskStatus    taskStatus[]
+  Task          Task[]
+}
+
+model ClientDetails {
+  id             String        @id @default(uuid())
+  clientCode     String?
+  firstName      String
+  lastName       String
+  email          String?
+  mobile         String
+  address        String?
+  city           String?
+  pin            String?
+  panNo          String?
+  aadharNo       String?
+  refferedBy     String?
+  status         String?
+  notes          String?
+  firmId         String
+  caseValue      Int?
+  assignTo       String?
+  dateAdded      DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  deletedAt      DateTime?
+  refSource      String?
+  office         Office?
+  description    String?
+  practiceAreaId String?
+  createdBy      String?
+  isActive       Boolean       @default(true)
+  cases          CaseDetail[]
+  firm           Firm          @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  practiceArea   practiceArea? @relation(fields: [practiceAreaId], references: [id], onDelete: Cascade)
+  documents      Document[]
+  Task           Task[]
+}
+
+model practiceArea {
+  id        String          @id @default(uuid())
+  type      String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  deletedAt DateTime?
+  cases     CaseDetail[]
+  clients   ClientDetails[]
+}
+
+model CaseDetail {
+  id             String        @id @default(uuid())
+  firmId         String
+  caseName       String
+  practiceAreaId String?
+  clientId       String
+  caseIdByCourt  String?
+  courtId        String?
+  description    String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  nextHearingAt  DateTime?
+  lastHearingAt  DateTime?
+  openedAt       DateTime?
+  closedAt       DateTime?
+  deletedAt      DateTime?
+  caseStageId    String?
+  caseStage      CaseStage?    @relation(fields: [caseStageId], references: [id])
+  assignedUsers  CaseAssign[]
+  client         ClientDetails @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  firm           Firm          @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  practiceArea   practiceArea? @relation(fields: [practiceAreaId], references: [id], onDelete: Cascade)
+  documents      Document[]
+  Task           Task[]
+  Chat           Chat[]
+}
+
+model CaseStage {
+  id         String       @id @default(uuid())
+  caseStage  String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  deletedAt  DateTime?
+  CaseDetail CaseDetail[]
+}
+
+model CaseAssign {
+  id        String     @id @default(uuid())
+  caseId    String
+  userId    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt DateTime?
+  case      CaseDetail @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Document {
+  id            String            @id @default(uuid())
+  doc           String
+  originalName  String
+  clientId      String
+  caseId        String
+  description   String?
+  uploadBy      String?
+  size          String
+  fileType      String?
+  googleFileId  String?
+  googleEditUrl String?
+  firstOpenById String?
+  firstOpenBy   User?             @relation("DocumentFirstOpenBy", fields: [firstOpenById], references: [id])
+  isUploaded    Boolean           @default(false)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  deletedAt     DateTime?
+  categoryId    String?
+  language      DocumentLanguage? @default(ENGLISH)
+  status        DocumentStatus?   @default(PENDING)
+
+  case             CaseDetail         @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  client           ClientDetails      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  category         DocumentCategory?  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  access           DocumentAccess[]
+  chunks           Chunk[]
+  documentChats    DocumentChat[]
+  documentMetaData DocumentMetaData[]
+}
+
+model DocumentMetaData {
+  id                 String    @id @default(uuid())
+  documentId         String?
+  document_date      DateTime?
+  parsedDate         DateTime?
+  parties            String[]  @default([])
+  document_category  String?
+  main_issues        String[]  @default([])
+  sections_mentioned String[]  @default([])
+  summary            String?
+  court_name         String?
+  case_number        String?
+  judge_name         String?
+  date_wise_events   Json?
+  Document           Document? @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model Chunk {
+  id              String                 @id @default(uuid()) @db.Uuid
+  documentId      String
+  content         String
+  embeddingArray  Float[]                @map("embedding_array")
+  embeddingVector Unsupported("vector")? @map("embedding_vector")
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  deletedAt       DateTime?
+  Document        Document               @relation(fields: [documentId], references: [id], onDelete: Cascade)
+}
+
+model Chat {
+  id            String         @id @default(uuid())
+  userId        String
+  title         String
+  type          ChatType       @default(CASE)
+  caseId        String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  deletedAt     DateTime?
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  case          CaseDetail?    @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  documentChats DocumentChat[]
+  chatHistory   ChatHistory[]
+}
+
+model DocumentChat {
+  id         String    @id @default(uuid())
+  documentId String
+  chatId     String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+  Document   Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  Chat       Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+}
+
+model ChatHistory {
+  id              String   @id @default(uuid())
+  chatId          String
+  messageContent  String   @default("")
+  messageType     String   @default("") // user or assistant
+  queryStrategy   String?
+  confidenceScore Float?
+  fileName        String?
+  sessionId       String?
+  createdAt       DateTime @default(now())
+
+  Chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+}
+
+model DocumentAccess {
+  id              String             @id @default(uuid())
+  userId          String
+  documentId      String
+  permissionLevel DocumentPermission
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  deletedAt       DateTime?
+  document        Document           @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Task {
+  id           String         @id @default(uuid())
+  taskName     String
+  description  String
+  assignTo     String?
+  statusId     String?
+  priority     Priority
+  clientId     String?
+  caseId       String?
+  firmId       String
+  creationDate DateTime?
+  dueDate      DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  deletedAt    DateTime?
+  assignedTo   User?          @relation("AssignedTasks", fields: [assignTo], references: [id], onDelete: Cascade)
+  case         CaseDetail?    @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  client       ClientDetails? @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  status       taskStatus?    @relation(fields: [statusId], references: [id], onDelete: Cascade)
+  firm         Firm?          @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  TaskComments TaskComments[]
+}
+
+model TaskComments {
+  id        String    @id @default(uuid())
+  comment   String
+  userId    String
+  taskId    String
+  fileUrls  String[]  @default([])
+  linkUrl   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  task      Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model taskStatus {
+  id        String    @id @default(uuid())
+  type      String
+  firmId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  firm      Firm      @relation(fields: [firmId], references: [id], onDelete: Cascade)
+  tasks     Task[]
+}
+
+model DocumentCategory {
+  id        String     @id @default(uuid())
+  type      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt DateTime?
+  documents Document[]
+}
+
+enum ChatType {
+  DOCUMENT
+  CASE
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum Role {
+  Admin
+  firmAdmin
+  firmEmployee
+}
+
+enum Office {
+  Primary
+  Secondary
+}
+
+enum DocumentPermission {
+  view
+  edit
+}
+
+enum DocumentLanguage {
+  ENGLISH
+  KANNADA
+  HINDI
+  GUJARATI
+  MARATHI
+  PUNJABI
+  BENGALI
+  ASSAMESE
+  ODIA
+  TAMIL
+  TELUGU
+  MALAYALAM
+  URDU
+  KONKANI
+  MANIPURI
+  KASHMIRI
+  NEPALI
+  SANSKRIT
+}
+
+enum DocumentStatus {
+  PENDING
+  READY
+  PROCESSING
+  FAILED
+}

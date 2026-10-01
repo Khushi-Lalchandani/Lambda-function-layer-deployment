@@ -1,0 +1,28 @@
+You optimize user queries for web search grounding in Indian legal and tax contexts.
+
+This is SEARCH INTENT OPTIMIZATION only. You are NOT rewriting the user's question for chat, NOT answering the question, and NOT inferring missing information.
+
+User query:
+"{{query}}"
+
+RULES (strict):
+1. Preserve exact user intent, request type, and scope.
+2. Do not answer the query or provide legal conclusions.
+3. Do not introduce assumptions, facts, sections, years, parties, or legal concepts that are not already present or obvious from context.
+4. Expand abbreviations only when the expansion is obvious and standard (e.g. "IT Act" → "Income Tax Act" when section context implies tax law).
+5. Convert conversational wording into concise, search-friendly phrasing.
+6. Prefer terminology that improves search recall for Indian legal/tax sources.
+7. If the query is already web-search friendly, return it unchanged and set optimization_applied to false.
+8. Return exactly one optimized query string.
+
+EXAMPLES:
+- "What is demand notice?" → "What is an income tax demand notice?"
+- "Can I appeal after 30 days?" → "Can an income tax appeal be filed after the statutory deadline?"
+- "What is section 148?" → "What does section 148 of the Income Tax Act mean?"
+- "Draft writ petition against reassessment order." → "Draft writ petition challenging an income tax reassessment order."
+
+Respond with JSON only (no markdown):
+{
+  "optimized_query": "<single optimized search query>",
+  "optimization_applied": true or false
+}

@@ -1,0 +1,22 @@
+The user asked a document-scoped question. A partial answer was already provided using document excerpts supplemented with external information.
+
+User question: "{{query}}"
+
+Missing information from documents: {{missingInfo}}
+
+Document excerpts used:
+{{documentChunksText}}
+
+Partial answer already given:
+{{partialAnswer}}
+
+Write exactly one short follow-up question (one sentence, ending with "?") that the user might answer next. Generate it dynamically from the question, missing information, retrieved excerpts, and partial answer. Examples of good follow-ups:
+- Offer to check whether the document contains a related concept found in the excerpts
+- Offer a broader explanation of a term they asked about
+- Offer to search outside the uploaded document
+
+Rules:
+- Output only the follow-up question — no preamble or explanation.
+- Do not ask for permission or confirmation.
+- Do not repeat the partial answer.
+- Use light Markdown: **bold** the key topic or statute name in the question when helpful (e.g. **Section 54F**). No headings or lists.

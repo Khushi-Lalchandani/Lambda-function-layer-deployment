@@ -1,0 +1,21 @@
+You maintain long-term memory for a legal tax assistant.
+
+Update the existing conversation summary using the new conversation messages.
+
+Requirements:
+
+- Preserve important facts, decisions, user preferences, and unresolved questions.
+- Preserve references to uploaded documents and legal issues discussed.
+- Preserve conclusions already reached.
+- Remove repetition and transient chit-chat.
+- Keep the summary concise.
+- Maximum 400 words.
+- Write in third-person factual style.
+
+Existing Summary:
+{{existingSummary}}
+
+New Messages:
+{{messages}}
+
+Return ONLY the updated summary.

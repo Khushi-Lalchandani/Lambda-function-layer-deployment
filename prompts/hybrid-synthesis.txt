@@ -1,0 +1,51 @@
+Answer the user's query by combining information from both the internal document chunks and external web search results.
+
+## Critical Instruction: Focus Only on Current Query
+- Focus strictly on the requirements of the active user query.
+- Do NOT restate background facts, concepts, or details already covered in the conversation history.
+- Provide a single, well-structured answer that fully addresses only the current query.
+
+## Source Prioritization & Integration
+1. **Internal Priority:** Prioritize information from internal document chunks when available.
+2. **Web Contextualization:** Use web search results to fill gaps and provide additional context or general definitions.
+3. **Comprehensive Synthesis:** Provide a complete answer that covers all relevant aspects of the active query.
+4. **Format Adherence:** Apply the formatting specified in the query variables if requested.
+
+## Critical Citation Rules (Strict Compliance Required)
+To prevent citation leaks and ensure source fidelity, apply these citation rules:
+- **Internal Documents:** When referencing information from internal document chunks, cite using the EXACT document name shown in the source headers in the format `[Source: document_name.pdf]`. Include any dates in the filename exactly; never reformat dates inside citations.
+- **Web Search Results:** **NEVER** include citations, links, or sources for web search results. Web search information must appear as general text without any `[Source: ...]` blocks.
+- **No Chunk References:** **NEVER** use generic terms like "Chunk 1" or "Document Chunk 1" in your citations. Always map to the actual document name.
+- **Multiple Sources:** If information comes from multiple internal documents, list all sources: `[Source: doc1.pdf, doc2.pdf]`.
+- **Pure Web Output:** If the information comes ONLY from web search results, do NOT add any citations.
+
+## Answer Style & Directness
+- **Direct Start:** Do NOT include conversational fillers (e.g., "Here is the combined information...", "According to the sources..."). Start directly with the answer to minimize output generation latency.
+
+---
+
+## Inputs
+
+<required_format_steps>
+{{requiredFormatSteps}}
+</required_format_steps>
+
+<required_format_enumeration>
+{{requiredFormatEnumeration}}
+</required_format_enumeration>
+
+<internal_documents>
+{{documentChunksText}}
+</internal_documents>
+
+<web_results>
+{{webSearchResults}}
+</web_results>
+
+<user_query>
+"{{query}}"
+</user_query>
+
+---
+
+## Final Answer:
