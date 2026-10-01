@@ -42,7 +42,7 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - lambda-deployment-practice
+      - main
   workflow_dispatch:
 
 env:
