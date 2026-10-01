@@ -49,7 +49,7 @@ env:
   AWS_REGION: ap-south-1
   LAMBDA_FUNCTION_NAME: ai-service-stag
   LAMBDA_LAYER_NAME: ai-service-stag-dependencies
-  NODE_VERSION: "20"
+  NODE_VERSION: "24"
 
 jobs:
   deploy:
