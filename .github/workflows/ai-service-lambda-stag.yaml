@@ -143,7 +143,7 @@ jobs:
             --layer-name "$LAMBDA_LAYER_NAME" \
             --description "Production Node.js dependencies for ${LAMBDA_FUNCTION_NAME}" \
             --zip-file fileb://layer.zip \
-            --compatible-runtimes nodejs20.x \
+            --compatible-runtimes nodejs24.x \
             --query LayerVersionArn \
             --output text)
           if [ -z "$LAYER_VERSION_ARN" ] || [ "$LAYER_VERSION_ARN" = "None" ]; then
