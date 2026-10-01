@@ -20,6 +20,7 @@
     "aws-lambda": "^1.0.6",
     "aws-sdk": "^2.1693.0",
     "axios": "^1.6.2",
+    "lodash": "^4.18.1",
     "openai": "^4.77.3"
   },
   "devDependencies": {
